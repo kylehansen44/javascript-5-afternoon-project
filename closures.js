@@ -62,15 +62,21 @@ const callJake = callFriend('Jake', 435-555-9248)
 */
 
 //Code Here
-function makeCounter
+function makeCounter(){
+  let num = 0
+
+  return function(){
+    return num += 1
+  }
+}
 
 
 //Uncomment this once you make your function
-//   var count = makeCounter();
-//   count(); // 1
-//   count(); // 2
-//   count(); // 3
-//   count(); // 4
+  var count = makeCounter();
+  count(); // 1
+  count(); // 2
+  count(); // 3
+  count(); // 4
 
 
 
@@ -86,18 +92,27 @@ function makeCounter
 */
 
 function counterFactory(value) {
+  return {
+    inc:function(){
+      value = value + 1
+      return value
+    },
+    dec:function(){
+      value = value - 1
+      return value
+    }
+  }
   // Code here.
 
   return {
-
   };
 }
 
 counter = counterFactory(10);
-// counter.inc() // 11
-// counter.inc() // 12
-// counter.inc() // 13
-// counter.dec() // 12
+counter.inc() // 11
+counter.inc() // 12
+counter.inc() // 13
+counter.dec() // 12
 
 
 
@@ -113,9 +128,11 @@ function motivation( firstname, lastname ) {
   var welcomeText = "You're doing awesome, keep it up";
 
   // code message function here.
-
+  function message(){
+    return `${welcomeText} ${firstname} ${lastname}.`
+  }
   //Uncommment this to return the value of your message function
-  //return message;
+  return message;
 }
 
 var greeting = motivation('Billy', 'Bob'); // 'You're doing awesome keep it up Billy Bob.
@@ -143,11 +160,15 @@ var module = (function() {
   // Anything that is being returned is made public and can be invoked from
   // outside our lexical scope
   return {
+    publicMethod(){
+      return privateMethod()
+      
+    }
     // Code here.
   };
 })();
 
-
+module.publicMethod()
 
 ////////// PROBLEM 7 //////////
 
@@ -162,7 +183,14 @@ function secretNumber() {
   var secret = 143;
 
   return {
-    // Code here
+    addToSecret:function(num1){
+      secret = secret += num1
+      return secret
+    },
+    takeAwayFromSecret:function(num2){
+      secret = secret -= num2
+      return secret
+    }
   };
 }
 
@@ -189,8 +217,41 @@ function secretNumber() {
 function timeOutCounter() {
   for (var i = 0; i <= 5; i++) {
     setTimeout(function() {
+      const closure = setTimeout(i)
       console.log(i);
     }, i * 1000);
   }
 }
 timeOutCounter();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function timeOutCounter() {
+//   for (var i = 0; i <= 5; i++) {
+//     setTimeout(function() {
+//       console.log(i);
+//     }, i * 1000);
+//   }
+// }
+// timeOutCounter();
